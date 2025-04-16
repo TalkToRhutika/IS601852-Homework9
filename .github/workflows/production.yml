@@ -71,13 +71,10 @@ jobs:
       #     exit-code: '1' # Fail the job if vulnerabilities are found
       #     ignore-unfixed: true
       #     severity: 'CRITICAL,HIGH'
-      
       - name: Install Trivy
         run: |
-          sudo apt-get update && sudo apt-get install -y wget
-          wget https://github.com/aquasecurity/trivy/releases/latest/download/trivy_0.50.1_Linux-64bit.deb
-          sudo dpkg -i trivy_0.50.1_Linux-64bit.deb
-        
+          curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sh -s -- -b /usr/local/bin
+
       - name: Run Trivy Scan
         run: |
           trivy image --exit-code 1 --severity HIGH,CRITICAL talktorhutika/fastapi:${{ github.sha }}
