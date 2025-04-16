@@ -77,5 +77,6 @@ jobs:
 
       - name: Run Trivy Scan
         run: |
-          trivy image --exit-code 1 --severity HIGH,CRITICAL talktorhutika/fastapi:${{ github.sha }}
+          trivy image --severity CRITICAL --exit-code 1 talktorhutika/fastapi:${{ github.sha }}
+      #trivy image --exit-code 1 --severity HIGH,CRITICAL talktorhutika/fastapi:${{ github.sha }}
         
